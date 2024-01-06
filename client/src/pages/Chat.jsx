@@ -17,6 +17,7 @@ import Snackbar from '@mui/material/Snackbar';
 import background from '../assets/background.svg'; // Replace with the actual path to your SVG file
 
 const ORIGIN = import.meta.env.VITE_ORIGIN
+console.log(import.meta.env.VITE_ORIGIN);
 
 function Chat() {
   const navigate = useNavigate();
