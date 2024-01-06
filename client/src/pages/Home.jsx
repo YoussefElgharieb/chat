@@ -54,7 +54,7 @@ function Home() {
                     component="form"
                     elevation={5}
                     sx = {{
-                        p: 16,
+                        p: 8,
                         bgcolor: `white`,
                     }}
                 >   
