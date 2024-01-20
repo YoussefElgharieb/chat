@@ -33,6 +33,27 @@ function Chat() {
 
 
   useEffect(() => {
+    const handleResize = () => {
+      if (chatBoxRef.current) {
+        const windowHeight = window.innerHeight;
+        chatBoxRef.current.style.height = `calc(${windowHeight}px - 128px)`;
+        chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+      }
+    };
+
+    // Initial setup
+    handleResize();
+
+    // Event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      // Cleanup: remove the event listener on component unmount
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [chat]);
+
+  useEffect(() => {
     // Scroll to the bottom of the chat box when chat state changes
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
