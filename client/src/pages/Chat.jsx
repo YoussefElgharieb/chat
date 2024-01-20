@@ -173,7 +173,7 @@ function Chat() {
       <Box
         ref={chatBoxRef}
         sx={{
-          height: "calc(100vh - 128px)",
+          height: "calc(100dvh - 128px)",
           backgroundImage: ` url(${background})`,
           overflowY: "auto",
         }}
