@@ -32,7 +32,6 @@ function Home() {
         }
         else {
             setAlert('please enter a room')
-        
             setOpen(true);
             e.stopPropagation();
         }

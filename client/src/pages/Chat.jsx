@@ -13,7 +13,13 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
+import LinearProgress from '@mui/material/LinearProgress';
 import background from '../assets/background.svg'; // Replace with the actual path to your SVG file
 
 const ORIGIN = import.meta.env.VITE_ORIGIN
@@ -27,6 +33,7 @@ function Chat() {
   const [open, setOpen] = useState(false);
   const [join, setJoin] = useState(false);
   const [alert, setAlert] = useState();
+  const [connected, setConnected] = useState(false);
   const chatRef = useRef(chat)
   const socketRef = useRef(null);
   const chatBoxRef = useRef(null);
@@ -57,6 +64,7 @@ function Chat() {
         else {
           navigate(`/`, { state: true })
         }
+        setConnected(true);
       })
     })
 
@@ -163,21 +171,26 @@ function Chat() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" sx={{
+        position:"fixed",
+        top:0,
+        }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {room}
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Box
         ref={chatBoxRef}
         sx={{
-          height: "calc(100dvh - 128px)",
+          minHeight: "100vh",
           backgroundImage: ` url(${background})`,
           overflowY: "auto",
         }}
-      > {chat &&
+      > <Box sx={{height: '64px',}}></Box>
+        {chat &&
         <Stack direction="column" spacing={1} sx={{ p: 1 }}>
           {chat.messages.length > 0 &&
             chat.messages.map((message) => (
@@ -203,16 +216,23 @@ function Chat() {
             ))}
         </Stack>
         }
+
+        <Box sx={{height: '64px',}}></Box>
       </Box>
+
       <Box
         sx={{
+          position:'fixed',
+          bottom:0,
+          left:0,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           px: '16px',
           height: '64px',
           bgcolor: 'primary.light',
-          color: "white"
+          color: "white",
+          right:0
         }}
       >
         <TextField
@@ -257,6 +277,24 @@ function Chat() {
 
         autoHideDuration={5000}
       />
+      <Dialog
+        open={!connected}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"🛌 😴 Oops! Our Couch Potato Server Hit the Snooze Button!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          
+            Looks like our server decided to take an unscheduled nap... again! We're poking it with a virtual stick to wake it up, but you know how it is with lazy servers—they like to stretch and yawn for about 50 seconds before they're fully awake. Thanks for your patience while our server gets its act together!
+            <br></br>
+            <br></br>
+            <LinearProgress />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
