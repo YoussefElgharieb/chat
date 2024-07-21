@@ -171,6 +171,7 @@ function Chat() {
 
   return (
     <>
+      <Box sx={{height:-webkit-fill-available}}>
       <AppBar position="static" sx={{
         position:"fixed",
         top:0,
@@ -260,6 +261,7 @@ function Chat() {
         >
           Send
         </Button>
+      </Box>
       </Box>
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
