@@ -65,7 +65,9 @@ function Chat() {
           navigate(`/`, { state: true })
         }
         setConnected(true);
+        console.log("inside");
       })
+      console.log("outside")
     })
 
     socketRef.current.on('get', (callback) => {
