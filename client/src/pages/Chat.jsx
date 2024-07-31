@@ -171,7 +171,7 @@ function Chat() {
 
   return (
     <>
-      <Box sx={{height:-webkit-fill-available}}>
+      <Box sx={{height:'100%'}}>
       <AppBar position="static" sx={{
         position:"fixed",
         top:0,
